@@ -1,0 +1,75 @@
+<table width="100%">
+  <tbody>
+    {% for block in section.blocks %}
+    <tr>
+      <td style="width: 44.4555%;height: 22px;">
+        <div style="text-align: center;">
+          <a data-fancybox="gallery" class="fancybox" href="{{block.settings.img1 | img_url:'master'}}" data-caption="{{block.settings.img1_txt}}" rel="group">
+            <img src="{{block.settings.img1 | img_url:'master' }}" alt="" width="600" height="auto" style="float: none;" /></a>
+        </div>
+        <p> </p>
+        <p style="text-align: center;">{{block.settings.img1_txt}}</p>
+      </td>
+      <td style="width: 43.5445%;">
+        <div style="text-align: center;">
+          <a data-fancybox="gallery" class="fancybox" href="{{block.settings.img2 | img_url:'master'}}" data-caption="{{block.settings.img2_txt}}" rel="group">
+            <img src="{{block.settings.img2 | img_url:'master'}}" alt="" width="600" height="auto" style="float: none;" /></a></div>
+        <p> </p>
+        <p style="text-align: center;">{{block.settings.img2_txt}}</p>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{{ '//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css' | stylesheet_tag }}
+{{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
+{{ '//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js' | script_tag }}
+<script>
+  $(document).ready(function() {
+    $('.fancybox').fancybox({
+      beforeShow : function(){
+        this.title =  $(this.element).data("caption");
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Section Gallery",
+  "settings": [],
+  "blocks":[
+    {
+      "name":"image",
+      "type": "image",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "img1",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "img1_txt",
+          "label": "Caption"
+        },
+        {
+          "type": "image_picker",
+          "id": "img2",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "img2_txt",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"image",
+      "category": "Temp"
+    }
+  ]
+}
+{% endschema %}
